@@ -96,7 +96,7 @@ header {
 }
 
 [type='radio']:checked ~ label {
-  background: #ff6a95;
+  background: #61dafb;
   color: #fff;
 }
 
@@ -156,11 +156,11 @@ input:focus {
 }
 
 .btn-primary {
-  background-color: #202142;
+  background-color: #20232a;
 }
 
 .btn-secondary {
-  background: #ff6a95;
+  background: #61dafb;
 }
 
 .btn:hover {
