@@ -5,6 +5,11 @@ import { Button } from './shared/Button';
 import { Card } from './shared/Card';
 
 export const FeedbackForm = () => {
+  const [text, setText] = useState('');
+  const [rating, setRating] = useState(10);
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [message, setMessage] = useState('');
+
   const { addFeedback, feedbackEdit, updateFeedback } =
     useContext(FeedbackContext);
 
@@ -16,23 +21,18 @@ export const FeedbackForm = () => {
     }
   }, [feedbackEdit]);
 
-  const [text, setText] = useState('');
-  const [rating, setRating] = useState(10);
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [message, setMessage] = useState('');
-
-  const handleTextChange = (e) => {
-    if (text === '') {
+  const handleTextChange = ({ target: { value } }) => {
+    if (value === '') {
       setBtnDisabled(true);
       setMessage(null);
-    } else if (text !== '' && text.trim().length <= 10) {
+    } else if (value !== '' && text.trim().length <= 10) {
       setBtnDisabled(true);
       setMessage('Text must be at least 10 characters');
     } else {
       setBtnDisabled(false);
       setMessage(null);
     }
-    setText(e.target.value);
+    setText(value);
   };
 
   const handleSubmit = (e) => {
@@ -50,6 +50,8 @@ export const FeedbackForm = () => {
         addFeedback(newFeedback);
       }
 
+      setBtnDisabled(true);
+      setRating(10);
       setText('');
     }
   };
@@ -58,8 +60,7 @@ export const FeedbackForm = () => {
     <Card>
       <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
-        {/* { @todo - rating select component} */}
-        <RatingSelect select={(rating) => setRating(rating)} />
+        <RatingSelect select={setRating} selected={rating} />
         <div className="input-group">
           <input
             onChange={handleTextChange}

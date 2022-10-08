@@ -186,19 +186,17 @@ input:focus {
 }
 
 .about-link {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  color: #fff;
-  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .about-link a {
   color: #fff;
+  cursor: pointer;
 }
 
 .about-link a:hover {
-  color: #ff6a95;
+  color: #61dafb;
 }
 
 .about h1 {
