@@ -1,6 +1,3 @@
-// import { useState, useContext, useEffect } from 'react';
-// import FeedbackContext from '../context/FeedbackContext';
-
 export const RatingSelect = ({ select, selected }) => {
   const handleChange = (e) => {
     select(+e.currentTarget.value);
