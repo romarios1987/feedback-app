@@ -2,6 +2,8 @@ import { createContext, useState, useEffect } from 'react';
 
 const FeedbackContext = createContext();
 
+const API_URL = 'https://api-json-server.onrender.com';
+
 export const FeedbackProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [feedback, setFeedback] = useState([]);
@@ -15,14 +17,14 @@ export const FeedbackProvider = ({ children }) => {
   }, []);
 
   const fetchFeedback = async () => {
-    const response = await fetch('/feedback?_sort=id&_order=desc');
+    const response = await fetch(`${API_URL}/feedback`);
     const data = await response.json();
     setFeedback(data);
     setIsLoading(false);
   };
 
   const addFeedback = async (newFeedback) => {
-    const response = await fetch('/feedback', {
+    const response = await fetch(`${API_URL}/feedback`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newFeedback),
@@ -33,13 +35,13 @@ export const FeedbackProvider = ({ children }) => {
 
   const deleteFeedback = async (id) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      await fetch(`/feedback/${id}`, { method: 'DELETE' });
+      await fetch(`${API_URL}/feedback/${id}`, { method: 'DELETE' });
       setFeedback(feedback.filter((item) => item.id !== id));
     }
   };
 
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch(`/feedback/${id}`, {
+    const response = await fetch(`${API_URL}/feedback/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
